@@ -1,10 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://2stkga5hf40w"]
+[gd_scene load_steps=26 format=3 uid="uid://2stkga5hf40w"]
 
 [ext_resource type="PackedScene" uid="uid://csxidku3d41fb" path="res://scenes/player.tscn" id="1_0iqg8"]
+[ext_resource type="Script" path="res://assetes/sprites/game_manager.gd" id="1_8xo5w"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assetes/fonts/PixelOperator8-Bold.ttf" id="2_0ukxg"]
 [ext_resource type="Texture2D" uid="uid://d0q2g65ahgok" path="res://assetes/sprites/world_tileset.png" id="2_ir6m6"]
 [ext_resource type="PackedScene" uid="uid://c5u832xs0goq8" path="res://scenes/platform.tscn" id="3_268a3"]
 [ext_resource type="PackedScene" uid="uid://c0cmau5y38256" path="res://scenes/coin.tscn" id="4_136y4"]
 [ext_resource type="PackedScene" uid="uid://btkhhrpl1rkgs" path="res://scenes/kilzone.tscn" id="5_vkcov"]
+[ext_resource type="PackedScene" uid="uid://dd8tx1kmy3y4e" path="res://scenes/slime.tscn" id="6_jshyn"]
+[ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://assetes/fonts/PixelOperator8.ttf" id="8_5e6ro"]
+[ext_resource type="AudioStream" uid="uid://m73dm4jhs3eq" path="res://assetes/music/time_for_adventure.mp3" id="10_k5s1o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjxmp"]
 texture = ExtResource("2_ir6m6")
@@ -325,6 +330,23 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_8xo5w")
+
+[node name="LabelScore" type="Label" parent="GameManager"]
+offset_left = -65.0
+offset_top = -15.0
+offset_right = 102.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_0ukxg")
+theme_override_font_sizes/font_size = 12
+text = "Your Collected X Coins"
+horizontal_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(1, 0)
 tile_set = SubResource("TileSet_rqaby")
@@ -421,3 +443,41 @@ autoplay = "move"
 
 [node name="platform5" parent="platforms" instance=ExtResource("3_268a3")]
 position = Vector2(328, -109)
+
+[node name="slime" parent="." instance=ExtResource("6_jshyn")]
+position = Vector2(218, 67)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -101.0
+offset_top = 66.0
+offset_right = -32.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_5e6ro")
+theme_override_font_sizes/font_size = 8
+text = "space jump"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 252.0
+offset_top = 77.0
+offset_right = 321.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_5e6ro")
+theme_override_font_sizes/font_size = 8
+text = " jump"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -36.0
+offset_right = 70.0
+offset_bottom = -23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_5e6ro")
+theme_override_font_sizes/font_size = 12
+text = "Great Job"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_k5s1o")
+autoplay = true
+bus = &"Music "
